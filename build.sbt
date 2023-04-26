@@ -10,7 +10,15 @@ lazy val microservice = Project("nino-insights-stubs", file("."))
     // suppress warnings in generated routes files
     scalacOptions += "-Wconf:src=routes/.*:s",
   )
+  .settings(
+    Compile / scalafmtOnCompile := true,
+    Test / scalafmtOnCompile := true,
+    IntegrationTest / scalafmtOnCompile := true,
+  )
   .configs(IntegrationTest)
   .settings(integrationTestSettings(): _*)
   .settings(resolvers += Resolver.jcenterRepo)
   .settings(CodeCoverageSettings.settings: _*)
+  .settings(
+    PlayKeys.playDefaultPort := 6085
+  )
